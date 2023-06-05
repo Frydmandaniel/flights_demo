@@ -2,20 +2,26 @@
 version: 2
 
 models:
-  - name: my_first_dbt_model
-    description: "A starter dbt model"
+  - name: dim_airports
     columns:
-      - name: id
+      - name: airport_code
         description: "The primary key for this table"
         tests:
           - unique
           - not_null
 
-  - name: my_second_dbt_model
-    description: "A starter dbt model"
+  - name: dim_aircrafts
     columns:
-      - name: id
+      - name: aircraft_code
         description: "The primary key for this table"
         tests:
           - unique
           - not_null
+sources:
+  - name: stg
+    database: flights_demo
+    schema: stg
+    tables: 
+      - name: airports_data
+      - name: aircrafts_data
+      - name: seats
