@@ -36,4 +36,6 @@ models:
     example:
       +materialized: incremental
     dimension:
-      +materialized: incremental
+      +materialized: table
+    facts:
+      +materialized: table
