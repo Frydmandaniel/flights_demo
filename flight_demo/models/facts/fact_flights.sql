@@ -13,7 +13,7 @@ with flights as (
 				select *from {{ ref('dim_aircrafts') }})
 ,dim_airports as (
 				select *from {{ ref('dim_airports')}})
-select fl.flight_id,fl.flight_no,fl.aircraft_code ,fl.departure_airport ,fl.arrival_airport ,fl.status,flight_duration ,flight_duration_expected ,
+select distinct fl.flight_id,fl.flight_no,fl.aircraft_code ,fl.departure_airport ,fl.arrival_airport ,fl.status,flight_duration ,flight_duration_expected ,
 (case when flight_duration_expected > flight_duration then 'longer'
  	  when flight_duration_expected < flight_duration then 'shorter' else 'expected' end) as compared_expected_actual,
        '{{ run_started_at.strftime ("%Y-%m-%d %H:%M:%S")}}'::timestamp as dbt_time
